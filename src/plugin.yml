@@ -1,0 +1,9 @@
+name : silkspawnerPlugin
+version: 1.0.1
+description: a small plugin that allows the player to retrieve a spawner using a diamond or iron pickaxe with the silktouch enchantment !
+author: theobessel
+api-version: 1.14
+
+main: fr.theobessel.silkspawner.PluginLoader
+
+commands:
