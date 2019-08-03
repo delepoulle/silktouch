@@ -2,6 +2,9 @@ package fr.theobessel.silkspawner;
 
 /**
  * Mining Class listnerer
+ *
+ * @author : Théo Bessel & Samuel Delepoulle
+ *
  */
 
 import org.bukkit.GameMode;
@@ -70,19 +73,15 @@ public class SpawnerMining implements Listener {
                         blockState.update();
                         blockStateMeta.setBlockState(blockState);
 
-
                         if (cheat) {
                             blockStateMeta.setDisplayName(diggedSpawner.getSpawnedType().name());
                         }
 
                         givedSpawner.setItemMeta(blockStateMeta);
-
                         ItemMeta meta = handItem.getItemMeta();
-                        //meta.setLore(Arrays.asList(diggedSpawner.getSpawnedType().name()));
                         givedSpawner.setItemMeta(meta);
 
                         event.setExpToDrop(0);
-
                         player.getInventory().addItem(givedSpawner);
                     }
                 }
@@ -104,51 +103,17 @@ public class SpawnerMining implements Listener {
                 ItemMeta itemMeta = spawnerItem.getItemMeta();
                 CustomItemTagContainer tagContainer = itemMeta.getCustomTagContainer();
 
-
-                /*
-                List<String> lores = new ArrayList<String>();
-                if (itemMeta.getLore() != null){
-                    lores = itemMeta.getLore();
-                }
-
-                System.out.println("lore" + lores);
-                */
-
                 ItemMeta spawnerItemMeta = spawnerItem.getItemMeta();
 
-                String entityType = "";
-
-
-
-                /*
-                if(cheat) {
-                    System.out.println("cheat");
-                    if (spawnerItemMeta.getDisplayName().contains("§8")) {
-                        entityType = spawnerItemMeta.getDisplayName().replaceAll("§8", "");
-                    }
-                } else {
-                    System.out.println("pas cheat");
-                    //entityType = spawnerItemMeta.getDisplayName();
-                }
-                */
-
-                /*
-                System.out.println(entityType);
-
-                if (block.hasMetadata(METADATA_TAG)){
-                    System.out.println( "on devrait spawner des " + block.getMetadata(METADATA_TAG).get(0).value() );
-                }*/
-
-                //spawner.setCreatureTypeByName(entityType);
-                if(tagContainer.hasCustomTag(key , ItemTagType.STRING)) {
-                    String foundValue = tagContainer.getCustomTag(key, ItemTagType.STRING);
-                    System.out.println(foundValue);
-                    spawner.setCreatureTypeByName(foundValue);
-                }
-
                 if(cheat){
-                    entityType = spawnerItemMeta.getDisplayName();
+                    String entityType = spawnerItemMeta.getDisplayName();
                     spawner.setCreatureTypeByName(entityType);
+                }else{
+                    if(tagContainer.hasCustomTag(key , ItemTagType.STRING)) {
+                        String entityType = tagContainer.getCustomTag(key, ItemTagType.STRING);
+                        System.out.println(entityType);
+                        spawner.setCreatureTypeByName(entityType);
+                    }
                 }
 
                 spawner.update();

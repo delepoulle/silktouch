@@ -3,6 +3,16 @@ package fr.theobessel.silkspawner;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+
+/**
+ *
+ *  Main plugin class
+ *
+ * @author : Théo Bessel & Samuel Delepoulle
+ *
+ */
+
+
 public class PluginLoader extends JavaPlugin{
 
     private FileConfiguration config = getConfig();
