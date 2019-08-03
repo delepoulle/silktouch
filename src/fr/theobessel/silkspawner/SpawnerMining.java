@@ -58,7 +58,6 @@ public class SpawnerMining implements Listener {
                 handItem.setItemMeta(itemMeta);
 
                 double rand = Math.random()*100.0;
-                System.out.println(rand + " vs " + breakProba);
 
                 if ( handItem == null || rand < breakProba ) return;
                 if ( handItem.getType() == Material.DIAMOND_PICKAXE | handItem.getType() == Material.IRON_PICKAXE) {
