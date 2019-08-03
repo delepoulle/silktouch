@@ -30,6 +30,7 @@ public class SpawnerMining implements Listener {
     boolean cheat = false;
 
     public static String METADATA_TAG = "spawntype";
+    private double breakProba;
 
     public SpawnerMining(Plugin plugin, boolean cheat){
         this.plugin = plugin;
@@ -53,9 +54,11 @@ public class SpawnerMining implements Listener {
                 itemMeta.getCustomTagContainer().setCustomTag(key, ItemTagType.STRING, diggedSpawner.getSpawnedType().name());
                 handItem.setItemMeta(itemMeta);
 
+                double rand = Math.random()*100.0;
+                System.out.println(rand + " vs " + breakProba);
 
-                if (handItem == null) return;
-                if (handItem.getType() == Material.DIAMOND_PICKAXE | handItem.getType() == Material.IRON_PICKAXE) {
+                if ( handItem == null || rand < breakProba ) return;
+                if ( handItem.getType() == Material.DIAMOND_PICKAXE | handItem.getType() == Material.IRON_PICKAXE) {
                     if (handItem.getEnchantments().containsKey(Enchantment.SILK_TOUCH)) {
                         ItemStack givedSpawner = new ItemStack(Material.SPAWNER, 1);
                         BlockStateMeta blockStateMeta = (BlockStateMeta) givedSpawner.getItemMeta();
@@ -155,4 +158,7 @@ public class SpawnerMining implements Listener {
 
     }
 
+    public void setBreakProbability(double breakProba) {
+        this.breakProba = breakProba;
+    }
 }

@@ -5,20 +5,29 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class PluginLoader extends JavaPlugin{
 
-    FileConfiguration config = getConfig();
+    private FileConfiguration config = getConfig();
 
     public static void main(String[] args) {}
 
     @Override
     public void onEnable() {
-        System.out.println("[PLUGIN INFO] Plugin started !");
 
+        config.addDefault("breakprobability", 10);
         config.addDefault("cheat", false);
         config.options().copyDefaults(true);
         saveConfig();
 
         boolean cheat = config.getBoolean("cheat");
-        getServer().getPluginManager().registerEvents(new SpawnerMining(this, cheat), this);
+        double breakProba = config.getDouble("breakprobability");
+
+        SpawnerMining plugin = new SpawnerMining(this, cheat);
+        plugin.setBreakProbability(breakProba);
+
+        getServer().getPluginManager().registerEvents(plugin, this);
+
+        String mode = cheat ? "(cheat mode)" : "" ;
+
+        System.out.println("[PLUGIN INFO] Plugin started! "+mode);
     }
 
     @Override

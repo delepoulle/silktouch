@@ -15,3 +15,9 @@ cheat: true
 ```
 when cheat mode is enable, you can rename the spawner, the spawned entity will by the name of the spawner.silktouch
 
+- probability to break (10 by default)
+```
+breakprobability: 10
+```
+
+0 if you want the spawner never breaks
